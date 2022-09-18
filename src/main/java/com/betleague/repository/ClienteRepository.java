@@ -15,4 +15,6 @@ public interface ClienteRepository extends JpaRepository<Cliente, Long>{
 	Optional<Cliente> findByEmailAndContra(String email, String contra);
 	
 	Optional<Cliente> findByCedula(Long cedula);
+	
+	Optional<Cliente> findByRol(String rol);
 }

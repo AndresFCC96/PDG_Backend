@@ -48,6 +48,9 @@ public class Cliente implements Serializable{/**
 	@Column(name = "foto", length = 800)
 	private String foto;
 	
+	@Column(name = "rol")
+	private String rol;
+	
 	@Column(name = "usuariocreador")
 	private String usuarioCreador;
 	

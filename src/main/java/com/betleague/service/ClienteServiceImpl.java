@@ -66,6 +66,7 @@ public class ClienteServiceImpl implements ClienteService {
 		cliente.setContra(clienteDTO.getContra());
 		cliente.setFoto("Default");
 		cliente.setTelefono(clienteDTO.getTelefono());
+		cliente.setRol(clienteDTO.getRol());
 		cliente.setFechaCreacion(new Date());
 		cliente.setUsuarioCreador("ACAMPAZ");
 		cliente.setEstado(CONSTANTES.ACTIVO);
@@ -131,6 +132,7 @@ public class ClienteServiceImpl implements ClienteService {
 		cliente.setContra(clienteDTO.getContra());
 		cliente.setFoto(clienteDTO.getFoto());
 		cliente.setTelefono(clienteDTO.getTelefono());
+		cliente.setRol(clienteDTO.getRol());
 		cliente.setFechaCreacion(clienteDTO.getFechaCreacion());
 		cliente.setUsuarioCreador(clienteDTO.getUsuarioCreador());
 		cliente.setUsuarioModificador(clienteDTO.getUsuarioModificador());

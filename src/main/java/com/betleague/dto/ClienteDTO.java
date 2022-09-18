@@ -25,6 +25,7 @@ public class ClienteDTO implements Serializable{
 	private String foto;
 	private String repetirContra;
 	private String telefono;
+	private String rol;
 	private String usuarioCreador;
 	private String usuarioModificador;
 	private Date fechaCreacion;
