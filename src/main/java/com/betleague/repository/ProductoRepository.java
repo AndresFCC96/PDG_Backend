@@ -18,4 +18,6 @@ public interface ProductoRepository extends JpaRepository<Producto, Long>{
 	List<Producto> findByEstado(String estado);
 	
 	List<Producto> findByAutor(String autor);
+	
+	List<Producto> findByCategoria(String categoria);
 }

@@ -21,5 +21,7 @@ public interface ProductoService {
 	
 	List<Producto> consultarProductoPorAutor(String autor) throws Exception;
 	
+	List<Producto> consultarProductoPorCategoria(String categoria) throws Exception;
+	
 	Producto guardarProducto(ProductoDTO productoDTO) throws Exception;
 }

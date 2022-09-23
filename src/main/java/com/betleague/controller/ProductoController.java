@@ -97,6 +97,17 @@ public class ProductoController {
 		}
 	}
 	
+	@GetMapping("/consultarProductosPorCategoria")
+	public ResponseEntity<?> consultarProductosPorCategoria(@RequestParam("categoria") String categoria) throws Exception {
+
+		try {
+			return ResponseEntity.ok().body(productoService.consultarProductoPorCategoria(categoria));
+		}catch (Exception e) {
+			// TODO: handle exception
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+		}
+	}
+	
 	@PostMapping("/guardarProducto")
 	public ResponseEntity<?> guardarProducto(@RequestBody ProductoDTO productoDTO) throws Exception {
 

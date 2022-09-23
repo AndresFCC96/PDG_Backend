@@ -149,4 +149,19 @@ public class ProductoServiceImpl implements ProductoService{
 		}
 	}
 
+	@Override
+	public List<Producto> consultarProductoPorCategoria(String categoria) throws Exception {
+		if (categoria.equals("") && categoria.trim().equals("") ) {
+			throw new Exception("El nombre no puede estar vacio");
+		}
+		
+		List<Producto> productoABuscar = productoRepository.findByCategoria(categoria);
+		
+		if (!productoABuscar.isEmpty()) {
+			return productoABuscar;
+		}else {
+			throw new Exception("La categoria " + categoria + " no tiene ningun producto creado.");
+		}
+	}
+
 }

@@ -26,10 +26,13 @@ public class ClienteServiceImpl implements ClienteService {
 				clienteDTO.getContra());
 
 		if (cliente.isPresent()) {
+			System.out.println(cliente.get().getRol());
 			return cliente.get();
 		} else {
 			throw new Exception("No se encontro ningun usuario con esos datos.");
 		}
+		
+
 	}
 
 	@Override
