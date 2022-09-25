@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,6 +38,7 @@ public class ClienteServiceImpl implements ClienteService {
 	}
 
 	@Override
+	@Transactional()
 	public Cliente guardarCliente(ClienteDTO clienteDTO) throws Exception {
 
 		validarCliente(clienteDTO);
@@ -43,7 +46,7 @@ public class ClienteServiceImpl implements ClienteService {
 		if (clienteDTO.getNombre().trim().equals("")) {
 			throw new Exception("El nombre no puede estar vacio.");
 		}
-
+		
 		if (clienteDTO.getApellidos().trim().equals("")) {
 			throw new Exception("Los apellidos no puede estar vacio.");
 		}
@@ -140,7 +143,7 @@ public class ClienteServiceImpl implements ClienteService {
 		cliente.setUsuarioCreador(clienteDTO.getUsuarioCreador());
 		cliente.setUsuarioModificador(clienteDTO.getUsuarioModificador());
 		cliente.setFechaModificacion(new Date());
-		cliente.setEstado(CONSTANTES.ACTIVO);
+		cliente.setEstado(clienteDTO.getEstado());
 		
 		return clienteRepository.save(cliente);
 	}

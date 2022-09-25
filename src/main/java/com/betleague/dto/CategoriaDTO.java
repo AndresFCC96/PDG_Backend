@@ -15,7 +15,7 @@ public class CategoriaDTO implements Serializable{/**
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private Long idCategoria;
+	private Long idcategoria;
 	private String nombre;
-
+	private String estado;
 }

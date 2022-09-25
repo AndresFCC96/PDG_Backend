@@ -1,5 +1,6 @@
 package com.betleague.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,23 +55,64 @@ public class CategoriaServiceImpl implements CategoriaService{
 			throw new Exception("La categoria no puede estar vacia");
 		}
 		
-		if (categoriaDTO.getIdCategoria() == null) {
-			throw new Exception("El id de la categoria no puede estar vacia");
+		if (categoriaDTO.getNombre().trim().equals("")) {
+			throw new Exception("Debe ingresar el nombre de la categoria");
 		}
 		
 		if (categoriaDTO.getNombre() == null) {
 			throw new Exception("Debe ingresar el nombre de la categoria");
 		}
 		
-		Optional<Categoria> buscarCategoria = categoriaRepository.findById(categoriaDTO.getIdCategoria());
-		
-		if (buscarCategoria.isPresent()) {
-			throw new Exception("La cagoria con id " + categoriaDTO.getIdCategoria() + " ya existe");
+		if (categoriaDTO.getEstado() == null) {
+			throw new Exception("Debe ingresar el estado de la categoria");
 		}
 		
 		Categoria categoria = new Categoria();
-		categoria.setIdCategoria(categoriaDTO.getIdCategoria());
 		categoria.setNombre(categoriaDTO.getNombre());
+		categoria.setEstado(categoriaDTO.getEstado());
+		return categoriaRepository.save(categoria);
+	}
+
+	@Override
+	public List<Categoria> consultarTodasLasCategorias() throws Exception {
+		
+		List<Categoria> categorias = categoriaRepository.findAll();
+		
+		if (!categorias.isEmpty()) {
+			return categorias;
+		}else {
+			throw new Exception("No hay categorias para mostrar");
+		}
+	}
+
+	@Override
+	public Categoria modificarCategoria(CategoriaDTO categoriaDTO) throws Exception {
+		if (categoriaDTO == null) {
+			throw new Exception("La categoria no puede estar vacia");
+		}
+		
+		if (categoriaDTO.getIdcategoria() == null) {
+			throw new Exception("el id de la categoria no puede estar vacio");
+		}
+		
+		if (categoriaDTO.getNombre().trim().equals("")) {
+			throw new Exception("Debe ingresar el nombre de la categoria");
+		}
+		
+		if (categoriaDTO.getEstado().trim().equals("")) {
+			throw new Exception("Debe ingresar el estado de la categoria");
+		}
+		
+		Optional<Categoria> buscarCategoriaPorId = categoriaRepository.findById(categoriaDTO.getIdcategoria());
+		
+		if (!buscarCategoriaPorId.isPresent()) {
+			throw new Exception("No existe una categoria con ese id");
+		}
+		
+		Categoria categoria = new Categoria();
+		categoria.setIdcategoria(categoriaDTO.getIdcategoria());
+		categoria.setNombre(categoriaDTO.getNombre());
+		categoria.setEstado(categoriaDTO.getEstado());
 		return categoriaRepository.save(categoria);
 	}
 
