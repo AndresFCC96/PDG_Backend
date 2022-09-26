@@ -63,7 +63,8 @@ public class MetodosDePagoServiceImpl implements MetodosDePagoService{
 			throw new Exception("Falta el ccv.");
 		}
 		
-		if (metodoDePagoDTO.getYear().toString().length() > 3 || metodoDePagoDTO.getYear().toString().length() < 3) {
+		if (metodoDePagoDTO.getCcv().toString().length() > 3 || metodoDePagoDTO.getCcv().toString().length() < 3) {
+			System.out.println(metodoDePagoDTO.getCcv());
 			throw new Exception("El CCV no puede tener mas o menos de 3 caracteres.");
 		}
 		
@@ -104,7 +105,7 @@ public class MetodosDePagoServiceImpl implements MetodosDePagoService{
 			throw new Exception("La cedula no puede estar vacia.");
 		}
 		
-		if (metodoDePagoDTO.getNumeroTarjeta() == null) {
+		if (metodoDePagoDTO.getNumeroTarjeta().trim().equals("")) {
 			throw new Exception("El numero de tarjeta no puede estar vacio.");
 		}
 		
@@ -112,21 +113,22 @@ public class MetodosDePagoServiceImpl implements MetodosDePagoService{
 			throw new Exception("El numero de tarjeta no puede tener mas o menos de 16 caracteres.");
 		}
 		
-		if (metodoDePagoDTO.getMes() == null) {
+		if (metodoDePagoDTO.getMes().trim().equals("")) {
 			throw new Exception("El mes no puede estar vacio.");
 		}
 		
 		
-		if (metodoDePagoDTO.getYear() == null) {
+		if (metodoDePagoDTO.getYear().trim().equals("")) {
 			throw new Exception("El año no puede estar vacio.");
 		}
 		
 		
-		if (metodoDePagoDTO.getCcv() == null) {
+		if (metodoDePagoDTO.getCcv().trim().equals("")) {
 			throw new Exception("Falta el ccv.");
 		}
 		
-		if (metodoDePagoDTO.getCcv().toString().length() > 3 || metodoDePagoDTO.getCcv().toString().length() < 3) {
+		if (metodoDePagoDTO.getCcv().length() > 3 || metodoDePagoDTO.getCcv().length() < 3) {
+			System.out.println(metodoDePagoDTO.getCcv());
 			throw new Exception("El CCV no puede tener mas o menos de 3 caracteres.");
 		}
 		
@@ -134,7 +136,7 @@ public class MetodosDePagoServiceImpl implements MetodosDePagoService{
 		
 		MetodoDePago metodoDePagoGuardar = new MetodoDePago();
 		
-		if (metodoDePagoAEncontrar.equals(false)) {
+		if (metodoDePagoAEncontrar.isEmpty()) {
 			metodoDePagoGuardar.setIdCliente(metodoDePagoDTO.getIdCliente());
 			metodoDePagoGuardar.setNumeroTarjeta(metodoDePagoDTO.getNumeroTarjeta().replaceAll(" ", ""));
 			metodoDePagoGuardar.setNombre(metodoDePagoDTO.getNombre());

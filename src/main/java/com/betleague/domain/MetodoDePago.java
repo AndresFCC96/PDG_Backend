@@ -35,12 +35,12 @@ public class MetodoDePago implements Serializable{
 	private String nombre; 
 	
 	@Column(name = "mes")
-	private Long mes; 
+	private String mes; 
 	
 	@Column(name = "year")
-	private Long year;
+	private String year;
 	
 	@Column(name = "ccv")
-	private Long ccv;
+	private String ccv;
 
 }

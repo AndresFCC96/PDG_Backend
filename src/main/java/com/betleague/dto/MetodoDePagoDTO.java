@@ -21,7 +21,7 @@ public class MetodoDePagoDTO implements Serializable{
 	private Long idCliente;
 	private String numeroTarjeta;
 	private String nombre; 
-	private Long mes; 
-	private Long year;
-	private Long ccv;
+	private String mes; 
+	private String year;
+	private String ccv;
 }
