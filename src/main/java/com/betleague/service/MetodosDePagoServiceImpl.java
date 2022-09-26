@@ -136,7 +136,7 @@ public class MetodosDePagoServiceImpl implements MetodosDePagoService{
 		
 		MetodoDePago metodoDePagoGuardar = new MetodoDePago();
 		
-		if (metodoDePagoAEncontrar.isEmpty()) {
+		if (!metodoDePagoAEncontrar.isPresent()) {
 			metodoDePagoGuardar.setIdCliente(metodoDePagoDTO.getIdCliente());
 			metodoDePagoGuardar.setNumeroTarjeta(metodoDePagoDTO.getNumeroTarjeta().replaceAll(" ", ""));
 			metodoDePagoGuardar.setNombre(metodoDePagoDTO.getNombre());
