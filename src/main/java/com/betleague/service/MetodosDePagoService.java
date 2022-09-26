@@ -13,5 +13,5 @@ public interface MetodosDePagoService {
 	
 	public MetodoDePago modificarMetodoDePago(MetodoDePagoDTO metodoDePagoDTO) throws Exception;
 	
-	public void eliminarMetodoDePago(Long numeroTarjeta) throws Exception;
+	public void eliminarMetodoDePago(String numeroTarjeta) throws Exception;
 }

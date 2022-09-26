@@ -84,14 +84,19 @@ public class MetodosDePagoServiceImpl implements MetodosDePagoService{
 	}
 
 	@Override
-	public void eliminarMetodoDePago(Long numeroTarjeta) throws Exception {
+	public void eliminarMetodoDePago(String numeroTarjeta) throws Exception {
 		
 		if (numeroTarjeta == null) {
 			throw new Exception("El metodo de pago no puede estar vacio.");
 		}
-	
 		
-		metodosRepository.deleteById(numeroTarjeta);
+		Optional<MetodoDePago> metodoDePago = metodosRepository.findByNumeroTarjeta(numeroTarjeta);
+		
+		if (metodoDePago.isPresent()) {
+			metodosRepository.delete(metodoDePago.get());			
+		}else {
+			throw new Exception("No existe un metodo de pago con ese numero de tarjeta");
+		}
 		
 	}
 

@@ -57,7 +57,7 @@ public class MetodoDePagoController {
 	}
 	
 	@DeleteMapping("/eliminarMetodoDePago")
-	public ResponseEntity<?> eliminarMetodoDePago(@RequestParam("numeroTarjeta") Long numeroTarjeta) throws Exception {
+	public ResponseEntity<?> eliminarMetodoDePago(@RequestParam("numeroTarjeta") String numeroTarjeta) throws Exception {
 
 		try {
 			metodosDePago.eliminarMetodoDePago(numeroTarjeta);
