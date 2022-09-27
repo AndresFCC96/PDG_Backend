@@ -44,7 +44,10 @@ public class Producto implements Serializable{
 	private String categoria;
 	
 	@Column(name = "fechasubida")
-	private Date fechaSubida;
+	private String fechaSubida;
+	
+	@Column(name = "tiempo")
+	private Long tiempo;
 	
 	@Column(name = "descripcion", length = 200)
 	private String descripcion;
@@ -55,6 +58,9 @@ public class Producto implements Serializable{
 	@Column(name = "archivo", length = 800)
 	private String archivo;
 	
+	@Column(name = "tipodesubasta")
+	private String tipoDeSubasta;
+	
 	@Column(name = "valoracionautor")
 	private Long valoracionAutor;
 	
@@ -64,4 +70,7 @@ public class Producto implements Serializable{
 	
 	@Column(name = "estado", length = 1)
 	private String estado;
+	
+	@Column(name = "cliente")
+	private Cliente cliente;
 }	

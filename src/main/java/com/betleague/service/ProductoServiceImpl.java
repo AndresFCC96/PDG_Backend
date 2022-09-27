@@ -54,6 +54,14 @@ public class ProductoServiceImpl implements ProductoService{
 			throw new Exception("La descripcion del producto no puede estar vacio.");
 		}
 		
+		if(productoDTO.getFechaSubida().trim().equals("")) {
+			throw new Exception("La fecha del producto es necesaria.");
+		}
+		
+		if(productoDTO.getTiempo() == null) {
+			throw new Exception("Debe ingresar las horas que va a estar abierta la subasta.");
+		}
+		
 		if(productoDTO.getFoto().trim().equals("")) {
 			throw new Exception("El producto debe llevar una foto.");
 		}
@@ -61,13 +69,15 @@ public class ProductoServiceImpl implements ProductoService{
 		Producto producto = new Producto();
 		
 		producto.setNombre(productoDTO.getNombre());
-		producto.setFechaSubida(new Date());
+		producto.setFechaSubida(productoDTO.getFechaSubida());
+		producto.setTiempo(productoDTO.getTiempo());
 		producto.setValoracionAutor(productoDTO.getValoracionAutor());
 		producto.setCategoria(productoDTO.getCategoria());
 		producto.setAutor(productoDTO.getAutor());
 		producto.setDescripcion(productoDTO.getDescripcion());
 		producto.setFoto(productoDTO.getFoto());
 		producto.setArchivo(productoDTO.getArchivo());
+		producto.setTipoDeSubasta(productoDTO.getTipoDeSubasta());
 		producto.setEstado(CONSTANTES.ACTIVO);
 		
 		return productoRepository.save(producto);

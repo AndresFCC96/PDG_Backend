@@ -5,6 +5,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 
+import com.betleague.domain.Cliente;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,11 +23,14 @@ public class ProductoDTO implements Serializable{/**
 	private String nombre;
 	private String autor;
 	private String categoria;
-	private Date fechaSubida;
+	private String fechaSubida;
+	private Long tiempo;
 	private String descripcion;
 	private String foto;
 	private String archivo;
+	private String tipoDeSubasta;
 	private Long valoracionAutor;
 	private Long subastaIdsubasta;
 	private String estado;
+	private Cliente cliente;
 }
