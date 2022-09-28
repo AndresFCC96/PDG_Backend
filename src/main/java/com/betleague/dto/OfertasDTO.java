@@ -2,6 +2,7 @@ package com.betleague.dto;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 
 import com.betleague.domain.Cliente;
@@ -24,7 +25,9 @@ public class OfertasDTO implements Serializable{
 
 	private long idOferta;
 	
-	private Cliente cliente;
+	private Cliente clienteOferta;
+	
+	private Cliente clienteResponsable;
 	
 	private Producto producto;
 	

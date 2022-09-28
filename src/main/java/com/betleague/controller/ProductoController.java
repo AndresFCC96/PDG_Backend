@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.betleague.dto.ClienteDTO;
 import com.betleague.dto.ProductoDTO;
 import com.betleague.service.ProductoService;
 
@@ -102,6 +103,17 @@ public class ProductoController {
 
 		try {
 			return ResponseEntity.ok().body(productoService.consultarProductoPorCategoria(categoria));
+		}catch (Exception e) {
+			// TODO: handle exception
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+		}
+	}
+	
+	@PostMapping("/consultarProductosPorCliente")
+	public ResponseEntity<?> guardarProducto(@RequestBody ClienteDTO clienteDTO) throws Exception {
+
+		try {
+			return ResponseEntity.ok().body(productoService.consultarProductoPorCliente(clienteDTO));
 		}catch (Exception e) {
 			// TODO: handle exception
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());

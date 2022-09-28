@@ -71,6 +71,9 @@ public class Producto implements Serializable{
 	@Column(name = "estado", length = 1)
 	private String estado;
 	
-	@Column(name = "cliente")
-	private Cliente cliente;
+	@Column(name = "clienteresponsable")
+	private Cliente clienteResponsable;
+	
+	@Column(name = "clienteganador")
+	private Cliente clienteGanador;
 }	

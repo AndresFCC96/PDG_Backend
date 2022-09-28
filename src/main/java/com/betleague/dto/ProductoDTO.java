@@ -32,5 +32,6 @@ public class ProductoDTO implements Serializable{/**
 	private Long valoracionAutor;
 	private Long subastaIdsubasta;
 	private String estado;
-	private Cliente cliente;
+	private Cliente clienteResponsable;
+	private Cliente clienteGanador;
 }

@@ -9,6 +9,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.betleague.domain.Producto;
+import com.betleague.dto.ClienteDTO;
 import com.betleague.dto.ProductoDTO;
 import com.betleague.repository.ProductoRepository;
 import com.betleague.utils.CONSTANTES;
@@ -171,6 +172,21 @@ public class ProductoServiceImpl implements ProductoService{
 			return productoABuscar;
 		}else {
 			throw new Exception("La categoria " + categoria + " no tiene ningun producto creado.");
+		}
+	}
+
+	@Override
+	public List<Producto> consultarProductoPorCliente(ClienteDTO clienteDTO) throws Exception {
+		if (clienteDTO == null) {
+			throw new Exception("El cliente con cedula " + clienteDTO.getCedula() + " no existe");
+		}
+		
+		List<Producto> productoABuscar = productoRepository.findByClienteResponsable(clienteDTO);
+		
+		if (!productoABuscar.isEmpty()) {
+			return productoABuscar;
+		}else {
+			throw new Exception("El cliente con cedula " + clienteDTO.getCedula() + " no tiene productos");
 		}
 	}
 

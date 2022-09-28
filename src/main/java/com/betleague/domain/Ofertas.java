@@ -28,8 +28,11 @@ public class Ofertas implements Serializable{/**
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long idOferta;
 	
-	@Column(name = "cliente")
-	private Cliente cliente;
+	@Column(name = "clienteoferta")
+	private Cliente clienteOferta;
+	
+	@Column(name = "clienteresponsable")
+	private Cliente clienteResponsable;
 	
 	@Column(name = "producto")
 	private Producto producto;

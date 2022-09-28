@@ -26,13 +26,14 @@ public class OfertasServiceImpl implements OfertasService{
 			throw new Exception("El cliente no puede ser nulo");
 		}
 		
-		List<Ofertas> ofetasPorCliente = ofertasRepository.findByCliente(cliente);
+//		List<Ofertas> ofetasPorCliente = ofertasRepository.findByCliente(cliente);
 		
-		if (!ofetasPorCliente.isEmpty()) {
-			return ofetasPorCliente;
-		}else {
-			throw new Exception("El cliente no tiene ofertas activas");
-		}
+//		if (!ofetasPorCliente.isEmpty()) {
+//			return ofetasPorCliente;
+//		}else {
+//			throw new Exception("El cliente no tiene ofertas activas");
+//		}
+		return null;
 	}
 
 	@Override
@@ -60,7 +61,7 @@ public class OfertasServiceImpl implements OfertasService{
 			throw new Exception("La oferta no puede ser menor a cero o estar vacia.");
 		}
 		
-		if (oferta.getCliente() == null) {
+		if (oferta.getClienteResponsable() == null) {
 			throw new Exception("El cliente no puede ser nulo.");
 		}
 		
@@ -75,7 +76,7 @@ public class OfertasServiceImpl implements OfertasService{
 		Ofertas ofertaAGuardar = new Ofertas();
 		
 		ofertaAGuardar.setIdOferta(oferta.getIdOferta());
-		ofertaAGuardar.setCliente(oferta.getCliente());
+		ofertaAGuardar.setClienteResponsable(oferta.getClienteResponsable());
 		ofertaAGuardar.setProducto(oferta.getProducto());
 		ofertaAGuardar.setValorOferta(oferta.getValorOferta());
 		
@@ -90,10 +91,6 @@ public class OfertasServiceImpl implements OfertasService{
 		
 		if (ofertas.getIdOferta() < 0) {
 			throw new Exception("La oferta no puede ser menor a cero o estar vacia.");
-		}
-		
-		if (ofertas.getCliente() == null) {
-			throw new Exception("El cliente no puede ser nulo.");
 		}
 		
 		if (ofertas.getProducto() == null) {
