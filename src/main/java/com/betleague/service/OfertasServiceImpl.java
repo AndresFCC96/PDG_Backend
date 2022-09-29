@@ -114,7 +114,7 @@ public class OfertasServiceImpl implements OfertasService{
 		
 		Ofertas oferta = new Ofertas();
 		
-		if (ofertaABuscar.isEmpty()) {
+		if (!ofertaABuscar.isPresent()) {
 			throw new Exception("No existe oferta con ese id");
 		}
 		
