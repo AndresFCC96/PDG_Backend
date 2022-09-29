@@ -23,7 +23,7 @@ public class ProductoServiceImpl implements ProductoService{
 	//Lista todos los productos con estado activo
 	@Override
 	public List<Producto> consultarProductos() throws Exception {
-		List<Producto> listaProductos = productoRepository.findByEstado(CONSTANTES.ACTIVO);
+		List<Producto> listaProductos = productoRepository.findAll();
 		
 		if (!listaProductos.isEmpty()) {
 			return listaProductos;
@@ -79,6 +79,8 @@ public class ProductoServiceImpl implements ProductoService{
 		producto.setFoto(productoDTO.getFoto());
 		producto.setArchivo(productoDTO.getArchivo());
 		producto.setTipoDeSubasta(productoDTO.getTipoDeSubasta());
+		producto.setClienteGanador(productoDTO.getClienteGanador());
+		producto.setClienteResponsable(productoDTO.getClienteResponsable());
 		producto.setEstado(CONSTANTES.ACTIVO);
 		
 		return productoRepository.save(producto);
@@ -176,17 +178,87 @@ public class ProductoServiceImpl implements ProductoService{
 	}
 
 	@Override
-	public List<Producto> consultarProductoPorCliente(ClienteDTO clienteDTO) throws Exception {
-		if (clienteDTO == null) {
-			throw new Exception("El cliente con cedula " + clienteDTO.getCedula() + " no existe");
+	public List<Producto> consultarProductoPorCliente(Long cedula) throws Exception {
+		if (cedula == null) {
+			throw new Exception("El cliente con cedula " + cedula + " no existe");
 		}
 		
-		List<Producto> productoABuscar = productoRepository.findByClienteResponsable(clienteDTO);
+		List<Producto> productoABuscar = productoRepository.findByClienteResponsable(cedula);
 		
 		if (!productoABuscar.isEmpty()) {
 			return productoABuscar;
 		}else {
-			throw new Exception("El cliente con cedula " + clienteDTO.getCedula() + " no tiene productos");
+			throw new Exception("El cliente con cedula " + cedula + " no tiene productos");
+		}
+	}
+
+	@Override
+	public Producto modificarProducto(ProductoDTO productoDTO) throws Exception {
+		 
+		if(productoDTO == null) {
+			throw new Exception("El producto no puede estar vacio.");
+		}
+		
+		if(productoDTO.getNombre().trim().equals("")) {
+			throw new Exception("El nombre del producto no puede estar vacio.");
+		}
+		
+		if(productoDTO.getAutor().trim().equals("")) {
+			throw new Exception("El dueño del producto no puede estar vacio.");
+		}
+		
+		if(productoDTO.getCategoria().trim().equals("")) {
+			throw new Exception("La categoria del producto no puede estar vacio.");
+		}
+		
+		if(productoDTO.getDescripcion().trim().equals("")) {
+			throw new Exception("La descripcion del producto no puede estar vacio.");
+		}
+		
+		if(productoDTO.getFechaSubida().trim().equals("")) {
+			throw new Exception("La fecha del producto es necesaria.");
+		}
+		
+		if(productoDTO.getTiempo() == null) {
+			throw new Exception("Debe ingresar las horas que va a estar abierta la subasta.");
+		}
+		
+		if(productoDTO.getFoto().trim().equals("")) {
+			throw new Exception("El producto debe llevar una foto.");
+		}
+		
+		Producto producto = new Producto();
+		
+		producto.setIdproducto(productoDTO.getIdproducto());
+		producto.setNombre(productoDTO.getNombre());
+		producto.setFechaSubida(productoDTO.getFechaSubida());
+		producto.setTiempo(productoDTO.getTiempo());
+		producto.setValoracionAutor(productoDTO.getValoracionAutor());
+		producto.setCategoria(productoDTO.getCategoria());
+		producto.setAutor(productoDTO.getAutor());
+		producto.setDescripcion(productoDTO.getDescripcion());
+		producto.setFoto(productoDTO.getFoto());
+		producto.setArchivo(productoDTO.getArchivo());
+		producto.setTipoDeSubasta(productoDTO.getTipoDeSubasta());
+		producto.setClienteGanador(productoDTO.getClienteGanador());
+		producto.setClienteResponsable(productoDTO.getClienteResponsable());
+		producto.setEstado(productoDTO.getEstado());
+		
+		return productoRepository.save(producto);
+	}
+
+	@Override
+	public Producto consultarProductoPorID(Long id) throws Exception {
+		if(id == null){
+			throw new Exception("El id no puede estar nulo");
+		}
+		
+		Optional<Producto> producto = productoRepository.findById(id);
+		
+		if(producto.isPresent()) {
+			return producto.get();
+		}else {
+			throw new Exception("No existe producto con este id");
 		}
 	}
 

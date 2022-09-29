@@ -23,6 +23,6 @@ public interface ProductoRepository extends JpaRepository<Producto, Long>{
 	
 	List<Producto> findByCategoria(String categoria);
 	
-	List<Producto> findByClienteResponsable(ClienteDTO clienteResponsable);
+	List<Producto> findByClienteResponsable(Long cedula);
 	
 }

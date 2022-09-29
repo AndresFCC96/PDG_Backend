@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.betleague.dto.ClienteDTO;
@@ -26,6 +27,16 @@ public class ClienteController {
 	public ResponseEntity<?> consultarClientes(){
 		try {
 			return ResponseEntity.ok().body(clienteService.consultarTodosLosCliente());
+		}catch (Exception e) {
+			// TODO: handle exception
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+		}
+	}
+	
+	@GetMapping("/consultarClientePorCedula")
+	public ResponseEntity<?> consultarClientePorCedula(@RequestParam("cedula") Long cedula){
+		try {
+			return ResponseEntity.ok().body(clienteService.consultarClientePorCedula(cedula));
 		}catch (Exception e) {
 			// TODO: handle exception
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());

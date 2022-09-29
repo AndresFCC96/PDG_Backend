@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -76,6 +77,16 @@ public class ProductoController {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
 		}
 	}
+
+	@GetMapping("/consultarProductoPorId")
+	public ResponseEntity<?> consultarProductosPorId(@RequestParam("id") Long id) throws Exception {
+		try {
+			return ResponseEntity.ok().body(productoService.consultarProductoPorID(id));
+		}catch (Exception e) {
+			// TODO: handle exception
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+		}
+	}
 	
 	@GetMapping("/consultarProductoPorNombre")
 	public ResponseEntity<?> consultarProductosPorNombre(@RequestParam("nombre") String nombre) throws Exception {
@@ -109,11 +120,11 @@ public class ProductoController {
 		}
 	}
 	
-	@PostMapping("/consultarProductosPorCliente")
-	public ResponseEntity<?> guardarProducto(@RequestBody ClienteDTO clienteDTO) throws Exception {
+	@GetMapping("/consultarProductosPorCliente")
+	public ResponseEntity<?> consultarListaProductosPorCliente(@RequestParam("cedula") Long cedula) throws Exception {
 
 		try {
-			return ResponseEntity.ok().body(productoService.consultarProductoPorCliente(clienteDTO));
+			return ResponseEntity.ok().body(productoService.consultarProductoPorCliente(cedula));
 		}catch (Exception e) {
 			// TODO: handle exception
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
@@ -125,6 +136,17 @@ public class ProductoController {
 
 		try {
 			return ResponseEntity.ok().body(productoService.guardarProducto(productoDTO));
+		}catch (Exception e) {
+			// TODO: handle exception
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+		}
+	}
+	
+	@PutMapping("/modificarProducto")
+	public ResponseEntity<?> modificarProducto(@RequestBody ProductoDTO productoDTO) throws Exception {
+
+		try {
+			return ResponseEntity.ok().body(productoService.modificarProducto(productoDTO));
 		}catch (Exception e) {
 			// TODO: handle exception
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());

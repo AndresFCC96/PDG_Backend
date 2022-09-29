@@ -29,15 +29,21 @@ public class Ofertas implements Serializable{/**
 	private long idOferta;
 	
 	@Column(name = "clienteoferta")
-	private Cliente clienteOferta;
+	private Long clienteOferta;
+	
+	@Column(name = "nombreclienteoferta")
+	private String nombreClienteOferta;
 	
 	@Column(name = "clienteresponsable")
-	private Cliente clienteResponsable;
+	private Long clienteResponsable;
 	
 	@Column(name = "producto")
-	private Producto producto;
+	private Long producto;
 	
-	@Column(name = "valorOferta")
+	@Column(name = "valoroferta")
 	private int valorOferta;
+	
+	@Column(name = "estado")
+	private String estado;
 
 }

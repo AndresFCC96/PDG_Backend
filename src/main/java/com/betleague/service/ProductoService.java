@@ -22,9 +22,13 @@ public interface ProductoService {
 	
 	List<Producto> consultarProductoPorAutor(String autor) throws Exception;
 	
-	List<Producto> consultarProductoPorCliente(ClienteDTO clienteDTO) throws Exception;
+	List<Producto> consultarProductoPorCliente(Long cedula) throws Exception;
+	
+	Producto consultarProductoPorID(Long id) throws Exception;
 	
 	List<Producto> consultarProductoPorCategoria(String categoria) throws Exception;
 	
 	Producto guardarProducto(ProductoDTO productoDTO) throws Exception;
+	
+	Producto modificarProducto(ProductoDTO productoDTO) throws Exception;
 }

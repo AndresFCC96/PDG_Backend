@@ -72,8 +72,8 @@ public class Producto implements Serializable{
 	private String estado;
 	
 	@Column(name = "clienteresponsable")
-	private Cliente clienteResponsable;
+	private Long clienteResponsable;
 	
 	@Column(name = "clienteganador")
-	private Cliente clienteGanador;
+	private Long clienteGanador;
 }	

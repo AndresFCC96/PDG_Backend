@@ -28,7 +28,6 @@ public class ClienteServiceImpl implements ClienteService {
 				clienteDTO.getContra());
 
 		if (cliente.isPresent()) {
-			System.out.println(cliente.get().getRol());
 			return cliente.get();
 		} else {
 			throw new Exception("No se encontro ningun usuario con esos datos.");
@@ -157,6 +156,22 @@ public class ClienteServiceImpl implements ClienteService {
 			return listaCliente;
 		}else {
 			throw new Exception("No existen clientes en el momento");
+		}
+	}
+
+	@Override
+	public Cliente consultarClientePorCedula(Long cedula) throws Exception {
+		
+		if (cedula == null) {
+			throw new Exception("La cedula no puede estar nula");
+		}
+		
+		Optional<Cliente> cliente = clienteRepository.findByCedula(cedula);
+		
+		if (cliente.isPresent()) {
+			return cliente.get();
+		}else {
+			throw new Exception("El cliente con cedula " +  cedula + " no existe");
 		}
 	}
 

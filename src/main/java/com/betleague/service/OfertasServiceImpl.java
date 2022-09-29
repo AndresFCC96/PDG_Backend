@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.betleague.domain.Cliente;
@@ -13,12 +14,16 @@ import com.betleague.dto.ClienteDTO;
 import com.betleague.dto.OfertasDTO;
 import com.betleague.dto.ProductoDTO;
 import com.betleague.repository.OfertasRepository;
+import com.betleague.repository.ProductoRepository;
 
 @Service
 public class OfertasServiceImpl implements OfertasService{
 	
 	@Autowired
 	private OfertasRepository ofertasRepository; 
+	
+	@Autowired
+	private ProductoRepository productoRepository;
 	
 	@Override
 	public List<Ofertas> encontrarTodasLasOfertasPorCliente(ClienteDTO cliente) throws Exception {
@@ -37,12 +42,14 @@ public class OfertasServiceImpl implements OfertasService{
 	}
 
 	@Override
-	public List<Ofertas> encontrarTodasLasOfertasPorProducto(ProductoDTO producto) throws Exception {
-		if (producto == null) {
+	public List<Ofertas> encontrarTodasLasOfertasPorProducto(Long id) throws Exception {
+		if (id == null) {
 			throw new Exception("El producto no puede ser nulo");
 		}
 		
-		List<Ofertas> ofetasPorProducto = ofertasRepository.findByProducto(producto);
+		Optional<Producto> producto = productoRepository.findById(id);
+		
+		List<Ofertas> ofetasPorProducto = ofertasRepository.findByProducto(producto.get().getIdproducto());
 		
 		if (!ofetasPorProducto.isEmpty()) {
 			return ofetasPorProducto;
@@ -75,10 +82,12 @@ public class OfertasServiceImpl implements OfertasService{
 		
 		Ofertas ofertaAGuardar = new Ofertas();
 		
-		ofertaAGuardar.setIdOferta(oferta.getIdOferta());
+		ofertaAGuardar.setClienteOferta(oferta.getClienteOferta());
+		ofertaAGuardar.setNombreClienteOferta(oferta.getNombreClienteOferta());
 		ofertaAGuardar.setClienteResponsable(oferta.getClienteResponsable());
 		ofertaAGuardar.setProducto(oferta.getProducto());
 		ofertaAGuardar.setValorOferta(oferta.getValorOferta());
+		oferta.setEstado(oferta.getEstado());
 		
 		return ofertasRepository.save(ofertaAGuardar);
 	}
@@ -105,12 +114,32 @@ public class OfertasServiceImpl implements OfertasService{
 		
 		Ofertas oferta = new Ofertas();
 		
-//		if (ofertaABuscar.isEmpty()) {
-//			throw new Exception("No existe oferta con ese id");
-//		}
+		if (ofertaABuscar.isEmpty()) {
+			throw new Exception("No existe oferta con ese id");
+		}
 		
+		oferta.setIdOferta(ofertas.getIdOferta());
+		oferta.setClienteOferta(ofertas.getClienteOferta());
+		oferta.setNombreClienteOferta(ofertas.getNombreClienteOferta());
+		oferta.setClienteResponsable(ofertas.getClienteResponsable());
+		oferta.setProducto(ofertas.getProducto());
+		oferta.setValorOferta(ofertas.getValorOferta());
+		oferta.setEstado(ofertas.getEstado());
 		
-		return null;
+		return ofertasRepository.save(oferta);
+		
+	}
+
+	@Override
+	public Ofertas encontrarLaOfertaMasAlta(Long id) throws Exception {
+		
+		Ofertas oferta = ofertasRepository.findTopByProductoOrderByValorOfertaDesc(id);
+		
+		if (oferta != null) {
+			return oferta;
+		}else {
+			throw new Exception("La oferta no tiene maximos");
+		}
 	}
 
 }

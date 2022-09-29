@@ -25,11 +25,15 @@ public class OfertasDTO implements Serializable{
 
 	private long idOferta;
 	
-	private Cliente clienteOferta;
+	private Long clienteOferta;
 	
-	private Cliente clienteResponsable;
+	private String nombreClienteOferta;
 	
-	private Producto producto;
+	private Long clienteResponsable;
+	
+	private Long producto;
 	
 	private int valorOferta;
+	
+	private String estado;
 }	

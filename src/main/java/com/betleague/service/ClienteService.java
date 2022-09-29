@@ -20,6 +20,13 @@ public interface ClienteService {
 	
 	/**
 	 * 
+	 * @param cedula
+	 * @throws Exception
+	 */
+	public Cliente consultarClientePorCedula(Long cedula) throws Exception;
+	
+	/**
+	 * 
 	 * @param clienteDTO
 	 * @return
 	 * @throws Exception

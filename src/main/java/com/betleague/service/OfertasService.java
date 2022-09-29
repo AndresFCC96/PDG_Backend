@@ -2,12 +2,9 @@ package com.betleague.service;
 
 import java.util.List;
 
-import com.betleague.domain.Cliente;
 import com.betleague.domain.Ofertas;
-import com.betleague.domain.Producto;
 import com.betleague.dto.ClienteDTO;
 import com.betleague.dto.OfertasDTO;
-import com.betleague.dto.ProductoDTO;
 
 public interface OfertasService {
 	
@@ -25,7 +22,7 @@ public interface OfertasService {
 	 * @return Una lista de ofertas por producto
 	 * @throws Exception
 	 */
-	List<Ofertas> encontrarTodasLasOfertasPorProducto(ProductoDTO producto) throws Exception;
+	List<Ofertas> encontrarTodasLasOfertasPorProducto(Long id) throws Exception;
 	
 	/**
 	 * 
@@ -44,4 +41,11 @@ public interface OfertasService {
 	 * @throws Exception
 	 */
 	Ofertas modificarOferta(OfertasDTO oferta) throws Exception;
+	
+	/**
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	Ofertas encontrarLaOfertaMasAlta(Long id) throws Exception;
 }
