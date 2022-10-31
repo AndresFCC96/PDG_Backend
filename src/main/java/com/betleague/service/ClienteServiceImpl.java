@@ -62,6 +62,18 @@ public class ClienteServiceImpl implements ClienteService {
 			throw new Exception("La cedula no puede estar vacia.");
 		}
 		
+		Optional<Cliente> clienteABuscarPorCedula = clienteRepository.findByCedula(clienteDTO.getCedula());
+		
+		Optional<Cliente> clienteABuscarPorEmail = clienteRepository.findByEmail(clienteDTO.getEmail());
+		
+		if (clienteABuscarPorCedula.isPresent()) {
+			throw new Exception("Ya existe un cliente con esa cedula");
+		}
+		
+		if (clienteABuscarPorEmail.isPresent()) {
+			throw new Exception("Ya existe un cliente con ese correo");
+		}
+		
 		Cliente cliente = new Cliente();
 
 		cliente.setCedula(clienteDTO.getCedula());
